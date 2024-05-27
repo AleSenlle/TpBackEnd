@@ -1,0 +1,14 @@
+<!-- tu_aplicacion/templates/Restaurantes/detail_restaurante.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalle del Restaurante</title>
+</head>
+<body>
+    <h1>{{ object.nombre }}</h1>
+    <p>Dirección: {{ object.direccion }}</p>
+    <p>Teléfono: {{ object.telefono }}</p>
+    <p>Descripción: {{ object.descripcion }}</p>
+    <a href="{% url 'list_restaurante' %}">Volver a la lista de restaurantes</a>
+</body>
+</html>
