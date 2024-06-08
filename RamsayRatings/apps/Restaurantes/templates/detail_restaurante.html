@@ -1,14 +1,35 @@
-<!-- tu_aplicacion/templates/Restaurantes/detail_restaurante.html -->
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Detalle del Restaurante</title>
-</head>
-<body>
-    <h1>{{ object.nombre }}</h1>
-    <p>Dirección: {{ object.direccion }}</p>
-    <p>Teléfono: {{ object.telefono }}</p>
-    <p>Descripción: {{ object.descripcion }}</p>
-    <a href="{% url 'list_restaurante' %}">Volver a la lista de restaurantes</a>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block title %}Detalle del Restaurante{% endblock %}
+
+{% block extra_head %}
+<style>
+    /* Estilos específicos para detail_restaurante.html */
+    .card {
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .card-content {
+        padding: 20px;
+    }
+</style>
+{% endblock %}
+
+{% block page_title %}Detalle del Restaurante{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500">
+        <div class="p-4">
+            <h2 class="text-xl font-bold mb-2">{{ object.nombre }}</h2>
+            <p class="text-gray-600 mb-4"><strong>Dirección:</strong> {{ object.direccion }}</p>
+            <p class="text-gray-600 mb-4"><strong>Teléfono:</strong> {{ object.telefono }}</p>
+            <p class="text-gray-600 mb-4"><strong>Email:</strong> {{ object.email }}</p>
+            <p class="text-gray-600 mb-4"><strong>Tipo:</strong> {{ object.tipo }}</p>
+            <a href="{% url 'list_restaurante' %}" class="text-blue-500 hover:underline">Volver a la lista de restaurantes</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

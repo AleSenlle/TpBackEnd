@@ -1,17 +1,52 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Lista de Restaurantes</title>
-</head>
-<body>
-    <h1>Lista de Restaurantes</h1>
-    <ul>
+{% extends 'base.html' %}
+
+{% block title %}Lista de Restaurantes{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8 flex-grow flex flex-col">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
         {% for restaurante in object_list %}
-            <li>
-                <a href="{% url 'detail_restaurante' restaurante.pk %}">{{ restaurante.nombre }}</a>
-                - {{ restaurante.direccion }}
-            </li>
+        <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-4">
+            <h2 class="text-xl font-bold mb-2">{{ restaurante.nombre }}</h2>
+            <p class="text-gray-600 mb-4"><strong>Dirección:</strong> {{ restaurante.direccion }}</p>
+            <p class="text-gray-600 mb-4"><strong>Tipo:</strong> {{ restaurante.tipo }}</p>
+            <a href="{% url 'detail_restaurante' restaurante.pk %}" class="text-blue-500 hover:underline">Ver detalles</a>
+        </div>
         {% endfor %}
-    </ul>
-</body>
-</html>
+    </div>
+
+    <!-- Paginación -->
+    <div class="mt-auto">
+        <div class="flex justify-center pb-8">
+            <div class="flex items-center space-x-2">
+                {% if page_obj.has_previous %}
+                <a href="?page={{ page_obj.previous_page_number }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Anterior</a>
+                {% endif %}
+
+                <!-- Señaladores de páginas -->
+                {% for num in page_obj.paginator.page_range %}
+                    {% if num == page_obj.number %}
+                        <span class="bg-blue-500 text-white font-bold py-2 px-4 rounded">{{ num }}</span>
+                    {% elif num > page_obj.number|add:'-2' and num < page_obj.number|add:'2' %}
+                        <a href="?page={{ num }}" class="bg-white hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-2 px-4 rounded">{{ num }}</a>
+                    {% elif num == 1 %}
+                        <a href="?page={{ num }}" class="bg-white hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-2 px-4 rounded">{{ num }}</a>
+                        {% if page_obj.number > 4 %}
+                            <span class="font-bold py-2 px-4">...</span>
+                        {% endif %}
+                    {% elif num == page_obj.paginator.num_pages %}
+                        {% if page_obj.number < page_obj.paginator.num_pages|add:'-3' %}
+                            <span class="font-bold py-2 px-4">...</span>
+                        {% endif %}
+                        <a href="?page={{ num }}" class="bg-white hover:bg-blue-500 hover:text-white text-blue-500 font-bold py-2 px-4 rounded">{{ num }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Siguiente</a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

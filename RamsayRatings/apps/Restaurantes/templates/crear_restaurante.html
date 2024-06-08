@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title %}Crear Restaurante{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
+        <h2 class="text-2xl font-bold mb-6">Crear Restaurante</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Guardar
+            </button>
+        </form>
+    </div>
+</div>
+{% endblock %}
