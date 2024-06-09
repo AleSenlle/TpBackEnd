@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}Eliminar Restaurante{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-red-500 p-6">
+        <h2 class="text-2xl font-bold mb-6">Eliminar Restaurante</h2>
+        <p class="mb-4">¿Estás seguro de que quieres eliminar el restaurante "{{ object.nombre }}"?</p>
+        <form method="post">
+            {% csrf_token %}
+            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                Confirmar Eliminación
+            </button>
+            <a href="{% url 'list_restaurante' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2">
+                Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -24,4 +24,5 @@ urlpatterns = [
     path('', HomeView.as_view(), name='home'),
     path('restaurantes/', include('apps.Restaurantes.urls')),
     path('reseñas/', include('apps.reseñas.urls')),
+    path('login/', include('apps.login.urls')),
 ]

@@ -38,9 +38,23 @@
                 </ul>
             </nav>
         </div>
-        <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
-            Iniciar Sesión
-        </button>
+        {% if user.is_authenticated %}
+            <!-- Mostrar el botón de cierre de sesión si el usuario está autenticado -->
+            <form action="{% url 'custom_logout' %}" method="post">
+                {% csrf_token %}
+                <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                    Cerrar Sesión
+                </button>
+            </form>
+        {% else %}
+            <!-- Mostrar el formulario de inicio de sesión si el usuario no está autenticado -->
+            <form method="post" action="{% url 'custom_login' %}" class="ml-4">
+                {% csrf_token %}
+                <button type="submit" class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2">
+                    Iniciar Sesión
+                </button>
+            </form>
+        {% endif %}
     </header>
 
     <!-- Contenido principal -->

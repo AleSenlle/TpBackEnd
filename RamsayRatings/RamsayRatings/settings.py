@@ -44,6 +44,7 @@ django_APPS = [
 Local_APPS = [
     'apps.Restaurantes',
     'apps.reseñas',
+    'apps.login',
     
 ]
 TAILWIND_APP_NAME = 'theme'
@@ -145,3 +146,6 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 NPM_BIN_PATH = 'npm.cmd'
+
+LOGIN_REDIRECT_URL = "/"
+LOGOUT_REDIRECT_URL = "/"
