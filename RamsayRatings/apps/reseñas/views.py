@@ -8,6 +8,7 @@ from django.views.generic.edit import UpdateView
 from django.urls import reverse_lazy
 from .forms import reseñaForm
 from ..Restaurantes.models import Restaurante
+from ..customUser.decorador import ReseñadorRequiredMixin
 
 class ListViewReseñas(ListView):
     model = Reseña
@@ -18,7 +19,8 @@ class DetailViewReseña(DetailView):
     model = Reseña
     template_name = 'detail_reseña.html'
 
-class CrearReseña(CreateView):
+
+class CrearReseña(ReseñadorRequiredMixin,CreateView,):
     model = Reseña
     template_name = 'crear_reseña.html'
     form_class = reseñaForm
@@ -29,12 +31,14 @@ class CrearReseña(CreateView):
         context['restaurantes'] = Restaurante.objects.all()
         return context
 
-class DeleteReseña(DeleteView):
+
+class DeleteReseña(ReseñadorRequiredMixin,DeleteView):
     model = Reseña
     template_name = 'delete_reseña.html'
     success_url = reverse_lazy('list_reseñas')
 
-class UpdateReseña(UpdateView):
+
+class UpdateReseña(ReseñadorRequiredMixin,UpdateView):
     model = Reseña
     template_name = 'update_reseña.html'
     form_class = reseñaForm

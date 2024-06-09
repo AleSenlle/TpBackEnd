@@ -17,6 +17,13 @@
         {% endfor %}
     </div>
 
+    <!-- Botón para crear reseña -->
+    {% if request.user.is_authenticated and request.user.user_type == 'reseñador' %}
+        <div class="mb-4">
+            <a href="{% url 'crear_reseña' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">Crear Reseña</a>
+        </div>
+    {% endif %}
+
     <!-- Paginación -->
     <div class="mt-auto">
         <div class="flex justify-center pb-8">
@@ -52,4 +59,3 @@
     </div>
 </div>
 {% endblock %}
-

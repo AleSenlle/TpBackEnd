@@ -28,7 +28,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 django_APPS = [
@@ -45,6 +44,8 @@ Local_APPS = [
     'apps.Restaurantes',
     'apps.reseñas',
     'apps.login',
+    'apps.customUser',
+    
     
 ]
 TAILWIND_APP_NAME = 'theme'
@@ -126,7 +127,6 @@ USE_I18N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
@@ -147,5 +147,9 @@ STATICFILES_DIRS = [
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 NPM_BIN_PATH = 'npm.cmd'
 
+#Para configurar el login y logout
 LOGIN_REDIRECT_URL = "/"
 LOGOUT_REDIRECT_URL = "/"
+
+#Para configurar el modelo de usuario personalizado
+AUTH_USER_MODEL = 'customUser.CustomUser'
