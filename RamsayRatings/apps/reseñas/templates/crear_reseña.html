@@ -9,29 +9,45 @@
         <form method="post">
             {% csrf_token %}
             <div class="mb-4">
-                <label for="restaurante" class="block text-gray-700 font-bold mb-2">Restaurante:</label>
-                <select name="restaurante" id="restaurante" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <label for="{{ form.restaurante.id_for_label }}" class="block text-gray-700 font-bold mb-2">Restaurante:</label>
+                <select name="restaurante" id="restaurante" class="form-select mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
                     {% for restaurante in restaurantes %}
                         <option value="{{ restaurante.id }}">{{ restaurante.nombre }}</option>
                     {% endfor %}
                 </select>
             </div>
             <div class="mb-4">
-                <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <label for="{{ form.nombre.id_for_label }}" class="block text-gray-700 font-bold mb-2">Nombre:</label>
+                <input type="text" name="nombre" id="nombre" class="form-input mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             </div>
             <div class="mb-4">
-                <label for="comentario" class="block text-gray-700 font-bold mb-2">Comentario:</label>
-                <textarea name="comentario" id="comentario" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"></textarea>
+                <label for="{{ form.comentario.id_for_label }}" class="block text-gray-700 font-bold mb-2">Comentario:</label>
+                <textarea name="comentario" id="comentario" class="form-textarea mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm"></textarea>
             </div>
             <div class="mb-4">
-                <label for="valoracion" class="block text-gray-700 font-bold mb-2">Valoración:</label>
-                <input type="number" name="valoracion" id="valoracion" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                <label for="{{ form.valoracion.id_for_label }}" class="block text-gray-700 font-bold mb-2">Valoración:</label>
+                <input type="number" name="valoracion" id="valoracion" class="form-input mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500 sm:text-sm">
             </div>
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
                 Guardar
             </button>
         </form>
+        <!-- Manejo de errores -->
+        {% if form.errors %}
+            <div class="mt-4 p-4 bg-red-100 text-red-700 rounded">
+                <h3 class="font-bold">Errores en el formulario:</h3>
+                <ul>
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

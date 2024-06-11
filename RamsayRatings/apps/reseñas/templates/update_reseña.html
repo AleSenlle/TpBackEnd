@@ -1,40 +1,40 @@
-{% extends 'base.html' %}
-
-{% block title %}Actualizar Reseña{% endblock %}
-
-{% block content %}
-<div class="container mx-auto mt-8">
-    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
-        <h2 class="text-2xl font-bold mb-6">Actualizar Reseña</h2>
-        <form method="post">
-            {% csrf_token %}
-            <div class="mb-4">
-                <label for="restaurante" class="block text-gray-700 font-bold mb-2">Restaurante:</label>
-                <select name="restaurante" id="restaurante" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-                    {% for restaurante in restaurantes %}
-                        <option value="{{ restaurante.id }}" {% if restaurante.id == form.instance.restaurante.id %}selected{% endif %}>{{ restaurante.nombre }}</option>
-                    {% endfor %}
-                </select>
-            </div>
-            <div class="mb-4">
-                <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre:</label>
-                <input type="text" name="nombre" id="nombre" value="{{ form.instance.nombre }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <div class="mb-4">
-                <label for="comentario" class="block text-gray-700 font-bold mb-2">Comentario:</label>
-                <textarea name="comentario" id="comentario" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ form.instance.comentario }}</textarea>
-            </div>
-            <div class="mb-4">
-                <label for="valoracion" class="block text-gray-700 font-bold mb-2">Valoración:</label>
-                <input type="number" name="valoracion" id="valoracion" value="{{ form.instance.valoracion }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
-            </div>
-            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
-                Guardar
-            </button>
-            <a href="{% url 'list_reseñas' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2">
-                Cancelar
-            </a>
-        </form>
-    </div>
-</div>
+{{% extends 'base.html' %} 
+ 
+{% block title %}Actualizar Reseña{% endblock %} 
+ 
+{% block content %} 
+<div class="container mx-auto mt-8"> 
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6"> 
+        <h2 class="text-2xl font-bold mb-6">Actualizar Reseña</h2> 
+        <form method="post"> 
+            {% csrf_token %} 
+            <div class="mb-4"> 
+                <label for="restaurante" class="block text-gray-700 font-bold mb-2">Restaurante:</label> 
+                <select name="restaurante" id="restaurante" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> 
+                    {% for restaurante in restaurantes %} 
+                        <option value="{{ restaurante.id }}" {% if restaurante.id == form.instance.restaurante.id %}selected{% endif %}>{{ restaurante.nombre }}</option> 
+                    {% endfor %} 
+                </select> 
+            </div> 
+            <div class="mb-4"> 
+                <label for="nombre" class="block text-gray-700 font-bold mb-2">Nombre:</label> 
+                <input type="text" name="nombre" id="nombre" value="{{ form.instance.nombre }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> 
+            </div> 
+            <div class="mb-4"> 
+                <label for="comentario" class="block text-gray-700 font-bold mb-2">Comentario:</label> 
+                <textarea name="comentario" id="comentario" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ form.instance.comentario }}</textarea> 
+            </div> 
+            <div class="mb-4"> 
+                <label for="valoracion" class="block text-gray-700 font-bold mb-2">Valoración:</label> 
+                <input type="number" name="valoracion" id="valoracion" value="{{ form.instance.valoracion }}" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"> 
+            </div> 
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"> 
+                Guardar 
+            </button> 
+            <a href="{% url 'list_reseñas' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2"> 
+                Cancelar 
+            </a> 
+        </form> 
+    </div> 
+</div> 
 {% endblock %}

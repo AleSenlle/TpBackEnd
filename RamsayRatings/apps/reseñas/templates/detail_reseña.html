@@ -11,12 +11,12 @@
         <p class="text-gray-600 mb-4"><strong>Valoración:</strong> {{ object.valoracion }}</p>
         <p class="text-gray-600 mb-4"><strong>Fecha:</strong> {{ object.fecha }}</p>
 
-        {% if request.user.user_type == 'reseñador' %}
+        {% if request.user == object.usuario %}
             <div class="flex justify-between">
-                <a href="{% url 'update_reseña' object.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                <a href="{% url 'update_reseña' object.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('¿Está seguro que desea modificar esta reseña?')">
                     Modificar
                 </a>
-                <form action="{% url 'delete_reseña' object.pk %}" method="post">
+                <form action="{% url 'delete_reseña' object.pk %}" method="post" onsubmit="return confirm('¿Está seguro que desea eliminar esta reseña?')">
                     {% csrf_token %}
                     <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                         Eliminar
@@ -27,4 +27,5 @@
     </div>
 </div>
 {% endblock %}
+
 

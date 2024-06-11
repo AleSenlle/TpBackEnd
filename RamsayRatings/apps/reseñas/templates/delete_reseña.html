@@ -7,16 +7,20 @@
     <div class="bg-white shadow-md rounded-md overflow-hidden border border-red-500 p-6">
         <h2 class="text-2xl font-bold mb-6">Eliminar Reseña</h2>
         <p class="mb-4">¿Estás seguro de que quieres eliminar la reseña "{{ object.nombre }}"?</p>
+        <p class="text-gray-600 mb-4"><strong>Restaurante:</strong> {{ object.restaurante.nombre }}</p>
+        <p class="text-gray-600 mb-4"><strong>Comentario:</strong> {{ object.comentario }}</p>
+        <p class="text-gray-600 mb-4"><strong>Valoración:</strong> {{ object.valoracion }}</p>
+        <p class="text-gray-600 mb-4"><strong>Fecha:</strong> {{ object.fecha }}</p>
         <form method="post">
             {% csrf_token %}
-            <input type="hidden" name="next" value="{{ request.GET.next }}">
-            <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            <button type="submit" name="confirm" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
                 Confirmar Eliminación
             </button>
-            <a href="{{ object.get_absolute_url }}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2">
+            <a href="{% url 'detail_reseña' object.pk %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2">
                 Cancelar
             </a>
         </form>
     </div>
 </div>
 {% endblock %}
+
