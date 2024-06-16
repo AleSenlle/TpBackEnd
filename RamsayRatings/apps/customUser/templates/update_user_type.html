@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% block title %}Actualizar Tipo de Usuario{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
+        <h2 class="text-2xl font-bold mb-6">Actualizar Tipo de Usuario</h2>
+        <form method="post">
+            {% csrf_token %}
+            <div class="mb-4">
+                <label for="user_type" class="block text-gray-700 font-bold mb-2">Tipo de Usuario:</label>
+                <select name="user_type" id="user_type" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">
+                    {% for choice in form.fields.user_type.choices %}
+                        <option value="{{ choice.0 }}" {% if choice.0 == form.instance.user_type %}selected{% endif %}>{{ choice.1 }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+                Guardar
+            </button>
+            <a href="{% url 'perfil' %}" class="bg-gray-300 hover:bg-gray-400 text-gray-700 font-bold py-2 px-4 rounded ml-2">
+                Cancelar
+            </a>
+        </form>
+    </div>
+</div>
+{% endblock %}

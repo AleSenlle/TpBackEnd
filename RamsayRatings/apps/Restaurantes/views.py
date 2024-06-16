@@ -8,6 +8,7 @@ from .models import Restaurante
 from .forms import RestauranteForm
 from django.urls import reverse_lazy
 from django.shortcuts import get_object_or_404, HttpResponseRedirect
+from ..customUser.decorador import RestaurantesRequiredMixin
 
 
 class DetailViewRestaurante(DetailView):
@@ -19,18 +20,18 @@ class ListViewRestaurante(ListView):
     template_name = 'list_restaurante.html'
     paginate_by = 6
 
-class CrearRestaurante(CreateView):
+class CrearRestaurante(RestaurantesRequiredMixin, CreateView):
     model = Restaurante
     template_name = 'crear_restaurante.html'
     form_class = RestauranteForm
     success_url = reverse_lazy('list_restaurante')
 
-class DeleteRestaurante(DeleteView):
+class DeleteRestaurante(RestaurantesRequiredMixin, DeleteView):
     model = Restaurante
     template_name = 'delete_restaurante.html'
     success_url = reverse_lazy('list_restaurante')
 
-class UpdateRestaurante(UpdateView):
+class UpdateRestaurante(RestaurantesRequiredMixin, UpdateView):
     model = Restaurante
     form_class = RestauranteForm
     template_name = 'update_restaurante.html'

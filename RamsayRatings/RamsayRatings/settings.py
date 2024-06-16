@@ -89,10 +89,20 @@ WSGI_APPLICATION = 'RamsayRatings.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
-DATABASES = {
+"""DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+    }
+}"""
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'db_ramsayP',          # Nombre de la base de datos
+        'USER': 'postgres',  # Usuario de PostgreSQL
+        'PASSWORD': 'Admin12_34',    # Contraseña de PostgreSQL
+        'HOST': 'localhost',            # Host donde se encuentra PostgreSQL (puede ser 'localhost' si está en tu máquina)
+        'PORT': '5432',                 # Puerto por defecto de PostgreSQL
     }
 }
 

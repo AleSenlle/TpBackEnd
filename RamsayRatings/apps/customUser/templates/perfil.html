@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}Perfil de Usuario{% endblock %}
+
+{% block content %}
+<div class="container mx-auto mt-8">
+    <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
+        <h2 class="text-2xl font-bold mb-6">Perfil de Usuario</h2>
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Nombre de Usuario:</label>
+            <p class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ user.username }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Correo Electrónico:</label>
+            <p class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ user.email }}</p>
+        </div>
+        <div class="mb-4">
+            <label class="block text-gray-700 font-bold mb-2">Tipo de Usuario:</label>
+            <p class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline">{{ user.get_user_type_display }}</p>
+        </div>
+        <a href="{% url 'update_user_type' %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">
+            Actualizar Tipo de Usuario
+        </a>
+    </div>
+</div>
+{% endblock %}

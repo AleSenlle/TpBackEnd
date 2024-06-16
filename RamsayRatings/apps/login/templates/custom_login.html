@@ -6,9 +6,19 @@
 <div class="container mx-auto mt-8">
     <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
         <h2 class="text-2xl font-bold mb-6">Iniciar Sesión</h2>
+        
+        <!-- Mostrar mensajes de error o éxito -->
         {% if messages %}
             {% for message in messages %}
-                <div class="mb-4 {{ message.tags }}">{{ message }}</div>
+                <div class="mb-4 {% if message.tags %}{{ message.tags }}{% endif %}">
+                    {% if message.tags == 'alert-danger' %}
+                        Error: {{ message }}
+                    {% elif message.tags == 'alert-success' %}
+                        Éxito: {{ message }}
+                    {% else %}
+                        {{ message }}
+                    {% endif %}
+                </div>
             {% endfor %}
         {% endif %}
         

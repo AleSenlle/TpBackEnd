@@ -25,4 +25,5 @@ urlpatterns = [
     path('restaurantes/', include('apps.Restaurantes.urls')),
     path('reseñas/', include('apps.reseñas.urls')),
     path('login/', include('apps.login.urls')),
+    path('perfil/', include('apps.customUser.urls')),
 ]

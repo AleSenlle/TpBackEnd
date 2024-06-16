@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 
-{% block title %}Lista de Reseñas{% endblock %}
+{% block title %}Listado de Reseñas{% endblock %}
 
 {% block content %}
 <div class="container mx-auto mt-8 flex-grow flex flex-col">
@@ -10,7 +10,12 @@
             <h2 class="text-xl font-bold mb-2">{{ reseña.nombre }}</h2>
             <p class="text-gray-600 mb-4"><strong>Restaurante:</strong> {{ reseña.restaurante.nombre }}</p>
             <p class="text-gray-600 mb-4"><strong>Comentario:</strong> {{ reseña.comentario|truncatechars:30 }}</p>
-            <p class="text-gray-600 mb-4"><strong>Valoración:</strong> {{ reseña.valoracion }}</p>
+            <div class="flex items-center mb-2 space-x-2">
+                <!-- Íconos de estrella para representar la puntuación -->
+                {% include 'star_icon.html' %}
+                <!-- Valor de la puntuación -->
+                <span class="font-bold">{{ reseña.valoracion }}</span>
+            </div>
             <p class="text-gray-600 mb-4"><strong>Fecha:</strong> {{ reseña.fecha }}</p>
             <a href="{% url 'detail_reseña' reseña.pk %}" class="text-blue-500 hover:underline">Seguir leyendo</a>
         </div>

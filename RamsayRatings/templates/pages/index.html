@@ -8,9 +8,10 @@
   <h1 class="text-3xl font-bold mb-4">Últimas Reseñas</h1>
   <!-- Grid de tarjetas que muestran las últimas reseñas. -->
   <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Tarjeta de una reseña. -->
+    <!-- Iteramos sobre las últimas reseñas -->
+    {% for reseña in ultimas_reseñas %}
     <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-      <!-- Imagen del restaurante. -->
+      <!-- Imagen del restaurante (cambiar por la imagen real si está disponible) -->
       <img
         src="/placeholder.svg"
         alt="Imagen del restaurante"
@@ -21,26 +22,25 @@
       />
       <div class="p-6">
         <!-- Título de la reseña. -->
-        <h2 class="text-xl font-bold mb-2">Restaurante La Esquina</h2>
+        <h2 class="text-xl font-bold mb-2">{{ reseña.nombre }}</h2>
         <!-- Descripción de la reseña. -->
-        <p class="text-gray-600 mb-4">Excelente comida y servicio. Definitivamente volveré.</p>
+        <p class="text-gray-600 mb-4">{{ reseña.comentario|truncatechars:100 }}</p>
         <!-- Puntuación de la reseña. -->
         <div class="flex items-center justify-between">
           <div class="flex items-center space-x-2">
             <!-- Ícono de estrella para representar la puntuación. -->
             {% include 'star_icon.html' %}
-              
             <!-- Valor de la puntuación. -->
-            <span class="font-bold">4.5</span>
+            <span class="font-bold">{{ reseña.valoracion }}</span>
           </div>
           <!-- Enlace para leer más detalles de la reseña. -->
-          <a class="text-blue-500 hover:underline" href="#">
+          <a class="text-blue-500 hover:underline" href="{% url 'detail_reseña' reseña.pk %}">
             Leer más
           </a>
         </div>
       </div>
     </div>
-    <!-- Otras tarjetas de reseñas siguen un formato similar. -->
+    {% endfor %}
   </div>
 </main>
 {% endblock %}

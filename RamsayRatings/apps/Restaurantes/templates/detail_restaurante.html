@@ -27,6 +27,20 @@
             <p class="text-gray-600 mb-4"><strong>Dirección:</strong> {{ object.direccion }}</p>
             <p class="text-gray-600 mb-4"><strong>Horario:</strong> {{ object.horario }}</p>
             <p class="text-gray-600 mb-4"><strong>Tipo:</strong> {{ object.tipo }}</p>
+            
+            {% if request.user.is_staff %}
+            <div class="flex justify-between">
+                <a href="{% url 'update_restaurante' object.pk %}" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" onclick="return confirm('¿Está seguro que desea modificar este Restaurante?')">
+                    Modificar
+                </a>
+                <form action="{% url 'delete_restaurante' object.pk %}" method="post" onsubmit="return confirm('¿Está seguro que desea eliminar este Restaurante?')">
+                    {% csrf_token %}
+                    <button type="submit" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+                        Eliminar
+                    </button>
+                </form>
+            </div>
+        {% endif %}
             <a href="{% url 'list_restaurante' %}" class="text-blue-500 hover:underline">Volver a la lista de restaurantes</a>
         </div>
     </div>
