@@ -1,4 +1,3 @@
-from django.shortcuts import render, redirect
 from .models import Reseña
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView

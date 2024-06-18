@@ -1,4 +1,4 @@
-from django.shortcuts import render
+
 from django.views.generic.edit import CreateView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import DeleteView
@@ -42,7 +42,7 @@ class UpdateRestaurante(RestaurantesRequiredMixin, UpdateView):
         # Obtenemos la instancia del Restaurante
         restaurante = get_object_or_404(Restaurante, pk=self.kwargs['pk'])
 
-        # Si no se ha cambiado el nombre, no lo validamos
+      #para que no te pida cambiar el nombre
         if form.cleaned_data.get('nombre') == restaurante.nombre:
             form.cleaned_data.pop('nombre')
 
