@@ -1,46 +1,25 @@
 {% extends 'base.html' %}
 
-{% block title %}Ramsey Review - Últimas Reseñas{% endblock %}
+{% block title %}Ramsey Review{% endblock %}
 
 {% block content %}
-<main class="flex-1 py-8 px-6">
-  <!-- Título principal de la sección de reseñas. -->
-  <h1 class="text-3xl font-bold mb-4">Últimas Reseñas</h1>
-  <!-- Grid de tarjetas que muestran las últimas reseñas. -->
-  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-    <!-- Iteramos sobre las últimas reseñas -->
-    {% for reseña in ultimas_reseñas %}
-    <div class="rounded-lg border bg-card text-card-foreground shadow-sm" data-v0-t="card">
-      <!-- Imagen del restaurante (cambiar por la imagen real si está disponible) -->
-      <img
-        src="/placeholder.svg"
-        alt="Imagen del restaurante"
-        class="w-full h-48 object-cover rounded-t-md"
-        width="300"
-        height="200"
-        style="aspect-ratio: 300 / 200; object-fit: cover;"
-      />
-      <div class="p-6">
-        <!-- Título de la reseña. -->
-        <h2 class="text-xl font-bold mb-2">{{ reseña.nombre }}</h2>
-        <!-- Descripción de la reseña. -->
-        <p class="text-gray-600 mb-4">{{ reseña.comentario|truncatechars:100 }}</p>
-        <!-- Puntuación de la reseña. -->
-        <div class="flex items-center justify-between">
-          <div class="flex items-center space-x-2">
-            <!-- Ícono de estrella para representar la puntuación. -->
-            {% include 'star_icon.html' %}
-            <!-- Valor de la puntuación. -->
-            <span class="font-bold">{{ reseña.valoracion }}</span>
-          </div>
-          <!-- Enlace para leer más detalles de la reseña. -->
-          <a class="text-blue-500 hover:underline" href="{% url 'detail_reseña' reseña.pk %}">
-            Leer más
-          </a>
+<div class="container mx-auto mt-8 flex-grow flex flex-col">
+    <h2 class="text-2xl font-bold mb-4">Últimas Reseñas</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+        {% for reseña in ultimas_reseñas %}
+        <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-4">
+            <h2 class="text-xl font-bold mb-2">{{ reseña.titulo }}</h2> <!-- Suponiendo que tienes un título en la reseña -->
+            <p class="text-gray-600 mb-4"><strong>Comentario:</strong> {{ reseña.comentario }}</p> <!-- Suponiendo que tienes un comentario en la reseña -->
+            <p class="text-gray-600 mb-4"><strong>Restaurante:</strong> {{ reseña.restaurante.nombre }}</p>
+            <!-- Mostrar la imagen del restaurante -->
+            {% if reseña.restaurante.imagen %}
+                <img src="{{ reseña.restaurante.imagen.url }}" alt="{{ reseña.restaurante.nombre }}" class="mb-4" style="max-width: 100%;">
+            {% else %}
+                <p>No hay imagen disponible.</p>
+            {% endif %}
+            <a href="{% url 'detail_reseña' reseña.pk %}" class="text-blue-500 hover:underline">Ver detalles de la reseña</a>
         </div>
-      </div>
+        {% endfor %}
     </div>
-    {% endfor %}
-  </div>
-</main>
+</div>
 {% endblock %}

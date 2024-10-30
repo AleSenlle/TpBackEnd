@@ -38,15 +38,9 @@ class UpdateRestaurante(RestaurantesRequiredMixin, UpdateView):
     context_object_name = 'restaurante'
     success_url = reverse_lazy('list_restaurante')
 
-    def form_valid(self, form):
-        # Obtenemos la instancia del Restaurante
-        restaurante = get_object_or_404(Restaurante, pk=self.kwargs['pk'])
-
-      #para que no te pida cambiar el nombre
-        if form.cleaned_data.get('nombre') == restaurante.nombre:
-            form.cleaned_data.pop('nombre')
-
-        # Guardamos los cambios
-        form.save()
-
-        return HttpResponseRedirect(self.success_url)
+class UpdateRestaurante(RestaurantesRequiredMixin, UpdateView):
+    model = Restaurante
+    form_class = RestauranteForm
+    template_name = 'update_restaurante.html'
+    context_object_name = 'restaurante'
+    success_url = reverse_lazy('list_restaurante')

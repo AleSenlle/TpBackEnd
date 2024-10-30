@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from .views import HomeView
-
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -27,3 +28,7 @@ urlpatterns = [
     path('login/', include('apps.login.urls')),
     path('perfil/', include('apps.customUser.urls')),
 ]
+
+# Agrega esta línea para servir archivos multimedia durante el desarrollo
+if settings.DEBUG:  # Asegúrate de que solo se sirvan archivos estáticos en modo de desarrollo
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -6,7 +6,8 @@
 <div class="container mx-auto mt-8">
     <div class="bg-white shadow-md rounded-md overflow-hidden border border-blue-500 p-6">
         <h2 class="text-2xl font-bold mb-6">Actualizar Restaurante</h2>
-        <form method="post">
+        <!-- Este metodo permite cargar archivos/imagenes -->
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form.as_p }}
             <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded">

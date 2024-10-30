@@ -85,7 +85,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'RamsayRatings.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
@@ -105,7 +104,6 @@ DATABASES = {
         'PORT': '5432',                 # Puerto por defecto de PostgreSQL
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -163,3 +161,6 @@ LOGOUT_REDIRECT_URL = "/"
 
 #Para configurar el modelo de usuario personalizado
 AUTH_USER_MODEL = 'customUser.CustomUser'
+
+MEDIA_URL = '/media/'  # URL para acceder a los archivos multimedia
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')  # Ruta en el sistema de archivos donde se almacenarán las imágenes subidas
